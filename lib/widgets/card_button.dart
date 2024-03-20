@@ -4,8 +4,9 @@ import 'package:atestat_info/model/dummy_data.dart';
 import 'package:flutter/material.dart';
 
 class CardButton extends StatefulWidget {
-  CardButton({required this.cardItem});
+  CardButton({required this.cardItem, required this.onPressed});
   CardItem cardItem;
+  Function(CardItem) onPressed;
 
   @override
   State<CardButton> createState() => _CardButtonState();
@@ -21,10 +22,11 @@ class _CardButtonState extends State<CardButton> {
       imageUrl = 'https://cdn-icons-png.freepik.com/512/14/14934.png';
     return ElevatedButton(
       onPressed: () {
-        setState(() {
-          widget.cardItem.isShowing = !widget.cardItem.isShowing;
-          print("test2");
-        });
+        // setState(() {
+        //   widget.cardItem.isShowing = !widget.cardItem.isShowing;
+        //   print("test2");
+        // });
+        widget.onPressed(widget.cardItem);
       },
       child: Container(
         padding: const EdgeInsets.all(8),
