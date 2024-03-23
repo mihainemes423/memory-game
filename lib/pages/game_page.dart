@@ -1,8 +1,10 @@
 import 'package:atestat_info/model/card_item.dart';
+import 'package:atestat_info/model/card_item_type.dart';
 import 'package:atestat_info/model/dummy_data.dart';
 import 'package:atestat_info/pages/scores_section.dart';
 import 'package:atestat_info/widgets/card_button.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
@@ -26,7 +28,26 @@ class _GamePageState extends State<GamePage> {
         lastPressedItem = cardItem;
       });
     }
-    print(cardItem.cardItemType.name);
+    if (lastPressedItem != null && cardItem.isShowing == false) {
+      cardItem.isShowing = true;
+      Future.delayed(Duration(seconds: 4), () {
+        if (lastPressedItem == cardItem) {
+          setState(() {
+            print("punct");
+            lastPressedItem = null;
+            cardItem.isShowing = false;
+          });
+        }
+        if (lastPressedItem != cardItem) {
+          setState(() {
+            print("gresit");
+            lastPressedItem = null;
+            cardItem.isShowing = false;
+          });
+        }
+        lastPressedItem = cardItem;
+      });
+    }
   }
 
   @override
