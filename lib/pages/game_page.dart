@@ -17,37 +17,86 @@ class _GamePageState extends State<GamePage> {
   CardItem? lastPressedItem = null;
 
   void onPressedItem(CardItem cardItem) {
-    if (lastPressedItem == null && cardItem.isShowing == false) {
-      setState(() {
-        cardItem.isShowing = true;
-        lastPressedItem = cardItem;
-      });
-    } else if (lastPressedItem != null && cardItem.isShowing == true) {
-      setState(() {
-        cardItem.isShowing = false;
-        lastPressedItem = cardItem;
-      });
+    if (lastPressedItem == null) {
+      //no item is showed
+      if (cardItem.isShowing == false) {
+        setState(() {
+          cardItem.isShowing = true;
+          lastPressedItem = cardItem;
+        });
+      } else {
+        //This case shouldn't happen
+        setState(() {
+          DummyData.unshowAll();
+          lastPressedItem = null;
+        });
+      }
+    } else {
+      //an item is showed
+      if (cardItem.isShowing == false) {
+        setState(() {
+          cardItem.isShowing = true;
+        });
+        
+        Future.delayed(Duration(seconds: 4), () {
+
+          if (lastPressedItem == cardItem) {
+            setState(() {
+              print("punct");
+              lastPressedItem = null;
+              cardItem.isShowing = false;
+            });
+          }
+          if (lastPressedItem != cardItem) {
+            setState(() {
+              print("gresit");
+              lastPressedItem = null;
+              cardItem.isShowing = false;
+            });
+          }
+          lastPressedItem = cardItem;
+        });
+      } else {
+        setState(() {
+          DummyData.unshowAll();
+          lastPressedItem = null;
+        });
+      }
     }
-    if (lastPressedItem != null && cardItem.isShowing == false) {
-      cardItem.isShowing = true;
-      Future.delayed(Duration(seconds: 4), () {
-        if (lastPressedItem == cardItem) {
-          setState(() {
-            print("punct");
-            lastPressedItem = null;
-            cardItem.isShowing = false;
-          });
-        }
-        if (lastPressedItem != cardItem) {
-          setState(() {
-            print("gresit");
-            lastPressedItem = null;
-            cardItem.isShowing = false;
-          });
-        }
-        lastPressedItem = cardItem;
-      });
-    }
+
+    // if (lastPressedItem == null && cardItem.isShowing == false) {
+    //   // show first item
+    //   setState(() {
+    //     cardItem.isShowing = true;
+    //     lastPressedItem = cardItem;
+    //   });
+    // } else if (lastPressedItem != null && cardItem.isShowing == true) {
+    //   print("Youhoo");
+    //   setState(() {
+    //     cardItem.isShowing = false;
+    //     lastPressedItem = cardItem;
+    //   });
+    // }
+    // if (lastPressedItem != null && cardItem.isShowing == false) {
+    //   cardItem.isShowing = true;
+    //   Future.delayed(Duration(seconds: 4), () {
+    //     if (lastPressedItem == cardItem) {
+    //       setState(() {
+    //         print("punct");
+    //         lastPressedItem = null;
+    //         cardItem.isShowing = false;
+    //       });
+    //     }
+    //     if (lastPressedItem != cardItem) {
+    //       setState(() {
+    //         print("gresit");
+    //         lastPressedItem = null;
+    //         cardItem.isShowing = false;
+    //       });
+    //     }
+    //     lastPressedItem = cardItem;
+    //   });
+    // }
   }
 
   @override
