@@ -3,6 +3,7 @@ import 'package:atestat_info/model/card_item_type.dart';
 import 'package:atestat_info/model/dummy_data.dart';
 import 'package:atestat_info/pages/scores_section.dart';
 import 'package:atestat_info/widgets/card_button.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -14,88 +15,75 @@ class GamePage extends StatefulWidget {
 }
 
 class _GamePageState extends State<GamePage> {
-  CardItem? lastPressedItem = null;
+  CardItem? lastPressedItem;
 
   void onPressedItem(CardItem cardItem) {
-    if (lastPressedItem == null) {
-      //no item is showed
-      if (cardItem.isShowing == false) {
-        setState(() {
-          cardItem.isShowing = true;
-          lastPressedItem = cardItem;
-        });
-      } else {
-        //This case shouldn't happen
-        setState(() {
-          DummyData.unshowAll();
-          lastPressedItem = null;
-        });
-      }
-    } else {
-      //an item is showed
-      if (cardItem.isShowing == false) {
-        setState(() {
-          cardItem.isShowing = true;
-        });
-        
-        Future.delayed(Duration(seconds: 4), () {
+    if (lastPressedItem == null && cardItem.isShowing == false) {
+      lastPressedItem = cardItem;
+      setState(() {
+        cardItem.isShowing = true;
+      });
+    } else if (lastPressedItem != null && cardItem.isShowing == false) {
+      if (cardItem == lastPressedItem) print("object");
+      setState(() {
+        cardItem.isShowing = true;
+      });
 
-          if (lastPressedItem == cardItem) {
-            setState(() {
-              print("punct");
-              lastPressedItem = null;
-              cardItem.isShowing = false;
-            });
-          }
-          if (lastPressedItem != cardItem) {
-            setState(() {
-              print("gresit");
-              lastPressedItem = null;
-              cardItem.isShowing = false;
-            });
-          }
-          lastPressedItem = cardItem;
-        });
-      } else {
+      Future.delayed(Duration(seconds: 2), () {
         setState(() {
           DummyData.unshowAll();
           lastPressedItem = null;
         });
-      }
+      });
     }
 
-    // if (lastPressedItem == null && cardItem.isShowing == false) {
-    //   // show first item
-    //   setState(() {
-    //     cardItem.isShowing = true;
-    //     lastPressedItem = cardItem;
-    //   });
-    // } else if (lastPressedItem != null && cardItem.isShowing == true) {
-    //   print("Youhoo");
-    //   setState(() {
-    //     cardItem.isShowing = false;
-    //     lastPressedItem = cardItem;
-    //   });
-    // }
-    // if (lastPressedItem != null && cardItem.isShowing == false) {
-    //   cardItem.isShowing = true;
-    //   Future.delayed(Duration(seconds: 4), () {
-    //     if (lastPressedItem == cardItem) {
-    //       setState(() {
-    //         print("punct");
-    //         lastPressedItem = null;
-    //         cardItem.isShowing = false;
-    //       });
-    //     }
-    //     if (lastPressedItem != cardItem) {
-    //       setState(() {
-    //         print("gresit");
-    //         lastPressedItem = null;
-    //         cardItem.isShowing = false;
-    //       });
-    //     }
-    //     lastPressedItem = cardItem;
-    //   });
+    // if (lastPressedItem == null) {
+    //   //no item is showed
+    //   if (cardItem.isShowing == false) {
+    //     setState(() {
+    //       cardItem.isShowing = true;
+    //       lastPressedItem = cardItem;
+    //     });
+    //   } else {
+    //     //This case shouldn't happen
+    //     setState(() {
+    //       DummyData.unshowAll();
+    //       lastPressedItem = null;
+    //     });
+    //   }
+    // } else {
+    //   //an item is showed
+    //   if (cardItem.isShowing == false) {
+    //     setState(() {
+    //       cardItem.isShowing = true;
+    //       print(cardItem.cardItemType);
+    //     });
+
+    //     Future.delayed(Duration(seconds: 5), () {
+    //       if (lastPressedItem == cardItem) {
+    //         setState(() {
+    //           print("punct");
+    //           lastPressedItem = null;
+    //           DummyData.unshowAll();
+
+    //         });
+    //       }
+    //       if (lastPressedItem != cardItem) {
+    //         setState(() {
+    //           print("gresit");
+    //           lastPressedItem = null;
+    //           DummyData.unshowAll();
+    //           //cardItem.isShowing = false;
+    //         });
+    //       }
+    //       lastPressedItem = cardItem;
+    //     });
+    //   } else {
+    //     setState(() {
+    //       DummyData.unshowAll();
+    //       lastPressedItem = null;
+    //     });
+    //   }
     // }
   }
 

@@ -1,3 +1,4 @@
+import 'package:atestat_info/model/card_item.dart';
 import 'package:flutter/material.dart';
 
 class ScoresSection extends StatefulWidget {
@@ -8,6 +9,21 @@ class ScoresSection extends StatefulWidget {
 }
 
 class _ScoresSectionState extends State<ScoresSection> {
+  int player1 = 0, player2 = 0;
+
+  void scoreCalculator(bool ok, int tura) {
+    if (tura == 1 && ok == 1) {
+      setState(() {
+        player1 = player1 + 1;
+      });
+    }
+    if (tura == 2 && ok == 1) {
+      setState(() {
+        player2 = player2 + 1;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Column(

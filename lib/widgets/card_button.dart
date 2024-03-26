@@ -22,10 +22,6 @@ class _CardButtonState extends State<CardButton> {
       imageUrl = 'https://cdn-icons-png.freepik.com/512/14/14934.png';
     return ElevatedButton(
       onPressed: () {
-        // setState(() {
-        //   widget.cardItem.isShowing = !widget.cardItem.isShowing;
-        //   print("test2");
-        // });
         widget.onPressed(widget.cardItem);
       },
       child: Container(

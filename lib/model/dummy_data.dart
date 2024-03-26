@@ -8,10 +8,8 @@ class DummyData {
   ];
 
   static unshowAll() {
-    print("Sa moara Franta");
     for (CardItem item in cardItemsList) {
       item.isShowing = false;
-      print(item.isShowing);
     }
   }
 }
