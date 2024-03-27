@@ -1,3 +1,4 @@
+import 'package:atestat_info/pages/game_page.dart';
 import 'package:flutter/material.dart';
 
 class StartPage extends StatelessWidget {
@@ -10,8 +11,8 @@ class StartPage extends StatelessWidget {
           child: ElevatedButton(
         //!Aici trebuie facut navigarea
         onPressed: () {
-          //https://flutter.svs.ong/#/navigation
-          print("Start");
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => GamePage()));
         },
         child: Text("Se apeleaza asta cand apesi"),
       )),

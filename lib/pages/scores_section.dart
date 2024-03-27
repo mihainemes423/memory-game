@@ -1,4 +1,5 @@
 import 'package:atestat_info/model/card_item.dart';
+import 'package:atestat_info/pages/end_page.dart';
 import 'package:flutter/material.dart';
 
 class ScoresSection extends StatefulWidget {
@@ -16,7 +17,6 @@ class _ScoresSectionState extends State<ScoresSection> {
   Widget build(BuildContext context) {
     final Color color1 = widget.tura ? Colors.red : Colors.blue;
     final Color color2 = widget.tura ? Colors.blue : Colors.red;
-    
 
     return Column(
       children: [
@@ -32,6 +32,15 @@ class _ScoresSectionState extends State<ScoresSection> {
         ),
         Text("   Player #2: ${widget.player2}",
             style: TextStyle(fontSize: 60, color: color2)),
+        ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: ((context) => EndPage(
+                        score1: widget.player1,
+                        score2: widget.player2,
+                      ))));
+            },
+            child: Text("End Game"))
       ],
     );
   }
