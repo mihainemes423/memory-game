@@ -1,9 +1,7 @@
 import 'package:atestat_info/model/card_item.dart';
-import 'package:atestat_info/model/card_item_type.dart';
 import 'package:atestat_info/model/dummy_data.dart';
 import 'package:atestat_info/pages/scores_section.dart';
 import 'package:atestat_info/widgets/card_button.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
@@ -16,75 +14,61 @@ class GamePage extends StatefulWidget {
 
 class _GamePageState extends State<GamePage> {
   CardItem? lastPressedItem;
+  int score1 = 0, score2 = 0;
+  bool tura = false;
+
+  void increaseScore() {
+    setState(() {
+      if (tura) {
+        score2++;
+      } else {
+        score1++;
+      }
+    });
+  }
+
+  void changeTura() {
+    setState(() {
+      tura = !tura;
+    });
+  }
 
   void onPressedItem(CardItem cardItem) {
-    if (lastPressedItem == null && cardItem.isShowing == false) {
-      lastPressedItem = cardItem;
-      setState(() {
-        cardItem.isShowing = true;
-      });
-    } else if (lastPressedItem != null && cardItem.isShowing == false) {
-      if (cardItem == lastPressedItem) print("object");
-      setState(() {
-        cardItem.isShowing = true;
-      });
-
-      Future.delayed(Duration(seconds: 2), () {
+    if (lastPressedItem == null) {
+      //no item is showed
+      if (cardItem.isShowing == false) {
+        setState(() {
+          cardItem.isShowing = true;
+          lastPressedItem = cardItem;
+        });
+      } else {
+        //This case shouldn't happen
         setState(() {
           DummyData.unshowAll();
           lastPressedItem = null;
         });
-      });
+      }
+    } else {
+      //an item is already showed
+      if (cardItem.isShowing == false) {
+        setState(() {
+          cardItem.isShowing = true;
+        });
+        if (lastPressedItem!.cardItemType == cardItem.cardItemType) {
+          increaseScore();
+          lastPressedItem = null;
+        } else {}
+        //if you choose wrong
+        Future.delayed(Duration(seconds: 2), () {
+          setState(() {
+            lastPressedItem!.isShowing = false;
+            cardItem.isShowing = false;
+            lastPressedItem = null;
+            changeTura();
+          });
+        });
+      }
     }
-
-    // if (lastPressedItem == null) {
-    //   //no item is showed
-    //   if (cardItem.isShowing == false) {
-    //     setState(() {
-    //       cardItem.isShowing = true;
-    //       lastPressedItem = cardItem;
-    //     });
-    //   } else {
-    //     //This case shouldn't happen
-    //     setState(() {
-    //       DummyData.unshowAll();
-    //       lastPressedItem = null;
-    //     });
-    //   }
-    // } else {
-    //   //an item is showed
-    //   if (cardItem.isShowing == false) {
-    //     setState(() {
-    //       cardItem.isShowing = true;
-    //       print(cardItem.cardItemType);
-    //     });
-
-    //     Future.delayed(Duration(seconds: 5), () {
-    //       if (lastPressedItem == cardItem) {
-    //         setState(() {
-    //           print("punct");
-    //           lastPressedItem = null;
-    //           DummyData.unshowAll();
-
-    //         });
-    //       }
-    //       if (lastPressedItem != cardItem) {
-    //         setState(() {
-    //           print("gresit");
-    //           lastPressedItem = null;
-    //           DummyData.unshowAll();
-    //           //cardItem.isShowing = false;
-    //         });
-    //       }
-    //       lastPressedItem = cardItem;
-    //     });
-    //   } else {
-    //     setState(() {
-    //       DummyData.unshowAll();
-    //       lastPressedItem = null;
-    //     });
-    //   }
-    // }
   }
 
   @override
@@ -115,7 +99,11 @@ class _GamePageState extends State<GamePage> {
               ],
             ),
           ),
-          ScoresSection(),
+          ScoresSection(
+            player1: score1,
+            player2: score2,
+            tura: tura,
+          ),
         ],
       ),
     );

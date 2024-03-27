@@ -35,6 +35,10 @@ class _CardButtonState extends State<CardButton> {
         child: Center(
           child: Text(
             widget.cardItem.cardItemType.name,
+            style: TextStyle(
+              color: Colors.red,
+              fontSize: 30,
+            ),
           ),
         ),
       ),
