@@ -57,16 +57,17 @@ class _GamePageState extends State<GamePage> {
         if (lastPressedItem!.cardItemType == cardItem.cardItemType) {
           increaseScore();
           lastPressedItem = null;
-        } else {}
-        //if you choose wrong
-        Future.delayed(Duration(seconds: 2), () {
-          setState(() {
-            lastPressedItem!.isShowing = false;
-            cardItem.isShowing = false;
-            lastPressedItem = null;
-            changeTura();
+        } else {
+          //if you choose wrong
+          Future.delayed(Duration(seconds: 2), () {
+            setState(() {
+              lastPressedItem!.isShowing = false;
+              cardItem.isShowing = false;
+              lastPressedItem = null;
+              changeTura();
+            });
           });
-        });
+        }
       }
     }
   }

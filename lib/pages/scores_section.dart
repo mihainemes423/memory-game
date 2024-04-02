@@ -1,4 +1,5 @@
 import 'package:atestat_info/model/card_item.dart';
+import 'package:atestat_info/model/dummy_data.dart';
 import 'package:atestat_info/pages/end_page.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,7 @@ class _ScoresSectionState extends State<ScoresSection> {
             style: TextStyle(fontSize: 60, color: color2)),
         ElevatedButton(
             onPressed: () {
+              DummyData.unshowAll();
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: ((context) => EndPage(
                         score1: widget.player1,

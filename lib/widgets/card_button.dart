@@ -29,18 +29,18 @@ class _CardButtonState extends State<CardButton> {
         decoration: BoxDecoration(
           image: DecorationImage(
             image: NetworkImage(imageUrl),
-            fit: BoxFit.cover,
+            // fit: BoxFit.cover,
           ),
         ),
-        child: Center(
-          child: Text(
-            widget.cardItem.cardItemType.name,
-            style: TextStyle(
-              color: Colors.red,
-              fontSize: 30,
-            ),
-          ),
-        ),
+        // child: Center(
+        //   child: Text(
+        //     widget.cardItem.cardItemType.name,
+        //     style: TextStyle(
+        //       color: Colors.red,
+        //       fontSize: 30,
+        //     ),
+        //   ),
+        // ),
       ),
     );
   }
