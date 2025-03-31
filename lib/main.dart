@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Memory Game',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color.fromARGB(255, 103, 59, 156),
         colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 103, 59, 156)),
