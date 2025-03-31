@@ -16,10 +16,13 @@ class _CardButtonState extends State<CardButton> {
   @override
   Widget build(BuildContext context) {
     String imageUrl;
-    if (widget.cardItem.isShowing)
-      imageUrl = widget.cardItem.cardItemType.imageUrl;
-    else
+    if (widget.cardItem.isShowing){
+      imageUrl = widget.cardItem.cardItemType.imageAsset;
+    }
+     else{
       imageUrl = 'https://cdn-icons-png.freepik.com/512/14/14934.png';
+    }
+      
     return ElevatedButton(
       onPressed: () {
         widget.onPressed(widget.cardItem);

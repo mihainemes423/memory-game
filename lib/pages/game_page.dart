@@ -6,7 +6,13 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 class GamePage extends StatefulWidget {
-  const GamePage({super.key});
+  final String player1Name;
+  final String player2Name;
+  const GamePage({
+    super.key,
+    required this.player1Name,
+    required this.player2Name,
+  });
 
   @override
   State<GamePage> createState() => _GamePageState();
@@ -16,6 +22,16 @@ class _GamePageState extends State<GamePage> {
   CardItem? lastPressedItem;
   int score1 = 0, score2 = 0;
   bool tura = false;
+  int selectedCardsCount = 0;
+  bool interactionEnabled = true;
+
+  void resetTurn() {
+    setState(() {
+      lastPressedItem = null;
+      selectedCardsCount = 0;
+      interactionEnabled = true;
+    });
+  }
 
   void increaseScore() {
     setState(() {
@@ -24,6 +40,7 @@ class _GamePageState extends State<GamePage> {
       } else {
         score1++;
       }
+      selectedCardsCount = 0;
     });
   }
 
@@ -34,10 +51,14 @@ class _GamePageState extends State<GamePage> {
   }
 
   void onPressedItem(CardItem cardItem) {
+    if (!interactionEnabled || cardItem.isShowing || selectedCardsCount >= 2)
+      return;
+
     if (lastPressedItem == null) {
       //no item is showed
       if (cardItem.isShowing == false) {
         setState(() {
+          selectedCardsCount = 1;
           cardItem.isShowing = true;
           lastPressedItem = cardItem;
         });
@@ -50,10 +71,13 @@ class _GamePageState extends State<GamePage> {
       }
     } else {
       //an item is already showed
-      if (cardItem.isShowing == false) {
+      if (cardItem.isShowing == false && selectedCardsCount == 1) {
         setState(() {
+          selectedCardsCount = 2;
           cardItem.isShowing = true;
         });
+
+        ///you choose right
         if (lastPressedItem!.cardItemType == cardItem.cardItemType) {
           increaseScore();
           lastPressedItem = null;
@@ -64,6 +88,7 @@ class _GamePageState extends State<GamePage> {
               lastPressedItem!.isShowing = false;
               cardItem.isShowing = false;
               lastPressedItem = null;
+              selectedCardsCount = 0;
               changeTura();
             });
           });
@@ -100,10 +125,21 @@ class _GamePageState extends State<GamePage> {
               ],
             ),
           ),
-          ScoresSection(
-            player1: score1,
-            player2: score2,
-            tura: tura,
+          Container(
+            width: 400,
+            decoration: BoxDecoration(
+              border: Border(left: BorderSide(color: Colors.grey.shade300)),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 40),
+            child: SingleChildScrollView(
+              child: ScoresSection(
+                player1: score1,
+                player2: score2,
+                tura: tura,
+                player1Name: widget.player1Name,
+                player2Name: widget.player2Name,
+              ),
+            ),
           ),
         ],
       ),
