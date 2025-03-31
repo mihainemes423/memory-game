@@ -1,5 +1,5 @@
-import 'package:atestat_info/model/card_item.dart';
-import 'package:atestat_info/model/card_item_type.dart';
+import 'package:memory_game/model/card_item.dart';
+import 'package:memory_game/model/card_item_type.dart';
 
 class DummyData {
   static List<CardItem> cardItemsList = [

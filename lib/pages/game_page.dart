@@ -1,7 +1,8 @@
-import 'package:atestat_info/model/card_item.dart';
-import 'package:atestat_info/model/dummy_data.dart';
-import 'package:atestat_info/pages/scores_section.dart';
-import 'package:atestat_info/widgets/card_button.dart';
+import 'package:memory_game/model/card_item.dart';
+import 'package:memory_game/model/dummy_data.dart';
+import 'package:memory_game/pages/scores_section.dart';
+import 'package:memory_game/widgets/card_button.dart';
+import 'package:memory_game/widgets/card_button.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 

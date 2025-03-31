@@ -1,5 +1,5 @@
-import 'package:atestat_info/pages/game_page.dart';
-import 'package:atestat_info/pages/player_name_page.dart';
+import 'package:memory_game/pages/game_page.dart';
+import 'package:memory_game/pages/player_name_page.dart';
 import 'package:flutter/material.dart';
 
 class StartPage extends StatelessWidget {

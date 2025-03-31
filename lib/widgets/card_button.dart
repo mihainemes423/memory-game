@@ -1,6 +1,6 @@
-import 'package:atestat_info/model/card_item.dart';
-import 'package:atestat_info/model/card_item_type.dart';
-import 'package:atestat_info/model/dummy_data.dart';
+import 'package:memory_game/model/card_item.dart';
+import 'package:memory_game/model/card_item_type.dart';
+import 'package:memory_game/model/dummy_data.dart';
 import 'package:flutter/material.dart';
 
 class CardButton extends StatefulWidget {

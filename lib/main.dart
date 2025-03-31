@@ -1,4 +1,4 @@
-import 'package:atestat_info/pages/start_page.dart';
+import 'package:memory_game/pages/start_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
