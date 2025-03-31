@@ -72,6 +72,7 @@ flutter:
      - assets/images/rabbit_in_grass.jpeg
      - assets/images/rabbit_on_rocks.jpeg
      - assets/images/white_rabbit_in_grass.jpeg
+     - assets/images/dontknow.png
      - assets/images/
 
   # An image asset can refer to one or more resolution-specific "variants", see

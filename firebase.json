@@ -9,7 +9,7 @@
     ],
     "rewrites": [
       {
-        "source": "**",
+        "source": "assets/assets/**",
         "destination": "/index.html"
       }
     ]

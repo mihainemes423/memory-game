@@ -15,12 +15,12 @@ class CardButton extends StatefulWidget {
 class _CardButtonState extends State<CardButton> {
   @override
   Widget build(BuildContext context) {
-    String imageUrl;
+    String imageAsset;
     if (widget.cardItem.isShowing){
-      imageUrl = widget.cardItem.cardItemType.imageAsset;
+      imageAsset = widget.cardItem.cardItemType.imageAsset;
     }
      else{
-      imageUrl = 'https://cdn-icons-png.freepik.com/512/14/14934.png';
+      imageAsset = "assets/images/dontknow.png";
     }
       
     return ElevatedButton(
@@ -31,7 +31,7 @@ class _CardButtonState extends State<CardButton> {
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: NetworkImage(imageUrl),
+            image: AssetImage(imageAsset),
             // fit: BoxFit.cover,
           ),
         ),
